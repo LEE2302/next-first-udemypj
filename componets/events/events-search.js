@@ -11,6 +11,10 @@ const EventsSearch = (props) => {
 
     const selectedYear = yearInputRef.current.value;
     const selectedMonth = monthInputRef.current.value;
+
+    // 부모에게 받은 프롭스(함수)를 사용하여 부모로 값 올리기(끌어올리기)
+    // 부모 컴포넌트에서 네비게이팅을 위함
+    props.onSearch(selectedYear, selectedMonth);
   };
 
   return (
