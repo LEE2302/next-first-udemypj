@@ -1,5 +1,10 @@
+import EventList from "@/componets/events/EventList";
+import ResultsTitle from "@/componets/events/results-title";
+import Button from "@/componets/ul/button";
+import ErrorAlert from "@/componets/ul/error-alert";
 import { getFilteredEvents } from "@/dummy-data";
 import { useRouter } from "next/router";
+import { Fragment } from "react";
 
 const FilterdEventsPage = () => {
   const router = useRouter();
@@ -27,18 +32,40 @@ const FilterdEventsPage = () => {
     numMonth < 1 ||
     numMonth > 12
   ) {
-    return <p>유효하지 않은 필터입니다. 유효한 값을 입력하세요!</p>;
+    return (
+      <Fragment>
+        <ErrorAlert>
+          <p>유효하지 않은 필터입니다. 유효한 값을 입력하세요!</p>
+        </ErrorAlert>
+        <div className="center">
+          <Button link="/events">Show All Events</Button>
+        </div>
+      </Fragment>
+    );
   }
 
   // 서버에서 값을 받은걸로 다시 조건문을 걸어 유효성 검사를 한다.
   const filteredEvents = getFilteredEvents({ year: numYear, month: numMonth });
   if (!filteredEvents || filteredEvents.length === 0) {
-    return <p>유효한 이벤트가 없습니다. 다시 입력해주세요</p>;
+    return (
+      <Fragment>
+        <ErrorAlert>
+          <p>유효한 이벤트가 없습니다. 다시 입력해주세요</p>
+        </ErrorAlert>
+        <div className="center">
+          <Button link="/events">Show All Events</Button>
+        </div>
+      </Fragment>
+    );
   }
+
+  const date = new Date(numYear, numMonth - 1);
+
   return (
-    <div>
-      <h1>필터 이벤트</h1>
-    </div>
+    <Fragment>
+      <ResultsTitle date={date} />
+      <EventList items={filteredEvents} />
+    </Fragment>
   );
 };
 

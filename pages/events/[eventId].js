@@ -12,7 +12,11 @@ const EventDetailPage = () => {
   const event = getEventById(eventId);
 
   if (!event) {
-    return <p>이벤트가 없습니다.</p>;
+    return (
+      <ErrorAlert>
+        <p>이벤트가 없습니다.</p>
+      </ErrorAlert>
+    );
   }
 
   return (
