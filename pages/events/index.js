@@ -1,8 +1,17 @@
+import EventList from "@/componets/events/EventList";
+import EventsSearch from "@/componets/events/events-search";
+import { getAllEvents } from "@/dummy-data";
+import { Fragment } from "react";
+
 const AllEventsPage = () => {
+  // 서버에게 요청을 보내고 받아온 데이터라고 생각하면 된다.
+  const events = getAllEvents();
+
   return (
-    <div>
-      <h1>모든 이벤트</h1>
-    </div>
+    <Fragment>
+      <EventsSearch />
+      <EventList items={events} />
+    </Fragment>
   );
 };
 
