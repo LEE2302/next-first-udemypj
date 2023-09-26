@@ -1,8 +1,10 @@
-import Link from "next/link";
-
 // css 모듈을 활용하여 컴포넌트에 css효과주기
 // styles혹은 classes를 주어야한다. 객체로 값이 들어옴
 import styles from "./EventItem.module.css";
+import Button from "../ul/button";
+import DateIcon from "../icons/date-icon";
+import AddressIcon from "../icons/address-icon";
+import ArrowRightIcon from "../icons/arrow-right-icon";
 
 const EventItem = ({ props }) => {
   // 프롭으로 받아오는 데이터를 구조분해 할당
@@ -28,14 +30,21 @@ const EventItem = ({ props }) => {
         <div className={styles.summary}>
           <h2>{title}</h2>
           <div className={styles.date}>
+            <DateIcon />
             <time>{humanReadableDate}</time>
           </div>
           <div className={styles.address}>
+            <AddressIcon />
             <address>{formattedAddress}</address>
           </div>
         </div>
         <div className={styles.actions}>
-          <Link href={exploreLink}>exploe evnet</Link>
+          <Button link={exploreLink}>
+            <span>Explore Evnet</span>
+            <span className={styles.icon}>
+              <ArrowRightIcon />
+            </span>
+          </Button>
         </div>
       </div>
     </li>
