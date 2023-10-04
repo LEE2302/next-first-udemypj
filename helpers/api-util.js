@@ -18,6 +18,10 @@ export async function getAllEvents() {
 
 export async function getFeaturedEvents() {
   const allEvetns = await getAllEvents();
-
   return allEvetns.filter((event) => event.isFeatured);
+}
+
+export async function getEventById(id) {
+  const allEvetns = await getAllEvents();
+  return allEvetns.find((event) => event.id === id);
 }
